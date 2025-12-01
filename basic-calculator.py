@@ -1,23 +1,27 @@
 import sys
 
 
-
+# addition function
 def addition(x, y):
     return round(float(x) + float(y), 2)
 
+# subtraction function
 def subtraction(x, y):
     return round(float(x) - float(y), 2)
 
+# multiplication function
 def multiplication(x, y):
     return round(float(x) * float(y), 2)
 
+# division function
 def division(x, y):
     return round(float(x) / float(y), 2)
 
+# remainder function
 def modulus(x, y):
     return round(float(x) % float(y), 2)
 
-
+# checks validity of user input, looking for a valid number or the 'quit' keyword
 def check_num():
     run_func = True
     while run_func:
@@ -33,7 +37,7 @@ def check_num():
 
         
         
-
+# checks validity of the operator input, determining which operation to perform 
 def check_operation(num_1, num_2):
     while True:
         operation = input()
@@ -53,6 +57,7 @@ def check_operation(num_1, num_2):
             print("Invalid operation. Please enter a valid operation. ")
         
 
+# main calculation function that calls secondary functions where needed
 def calculate():
     print("Welcome! I'm a calculator. Enter " \
         "your first number: (Type 'quit' to exit the program.)")
@@ -64,7 +69,7 @@ def calculate():
     return result
     
 
-
+# the main function of the application that runs upon start up
 def main():
     while 1:
         result = calculate()
