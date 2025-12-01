@@ -1,50 +1,61 @@
-
+import sys
 
 
 
 def addition(x, y):
-    return x + y
+    return round(float(x) + float(y), 2)
 
 def subtraction(x, y):
-    return x - y
+    return round(float(x) - float(y), 2)
 
 def multiplication(x, y):
-    return x * y
+    return round(float(x) * float(y), 2)
 
 def division(x, y):
-    return x / y
+    return round(float(x) / float(y), 2)
 
 def modulus(x, y):
-    return x % y
+    return round(float(x) % float(y), 2)
 
 
 def check_num():
-    num = input()
-    if type(num) == (int or float):
-        return num
-    else:
-        print("Invalid input.")
-        check_num()
+    run_func = True
+    while run_func:
+        num = input()
+        if num == 'quit':
+            sys.exit()
+        try:
+            float(num)
+            run_func = False
+        except:
+            print("Invalid input. Please enter a number. ")
+    return num
+
+        
+        
 
 def check_operation(num_1, num_2):
-    operation = input()
-    if operation == '+':
-        return addition(num_1, num_2)
-    elif operation == '-':
-        return subtraction(num_1, num_2)
-    elif operation == '/':
-        return division(num_1, num_2)
-    elif operation == '*':
-        return multiplication(num_1, num_2)
-    elif operation == '%':
-        return modulus(num_1, num_2)
-    else:
-        print("Invalid operation. Try again. ")
-        check_operation()
+    while True:
+        operation = input()
+        if operation == '+' or operation == 'addition':
+            return addition(num_1, num_2)
+        elif operation == '-' or operation == 'subtraction':
+            return subtraction(num_1, num_2)
+        elif operation == '/' or operation == 'division':
+            return division(num_1, num_2)
+        elif operation == '*' or operation == 'multiplication':
+            return multiplication(num_1, num_2)
+        elif operation == '%' or operation == 'modulus':
+            return modulus(num_1, num_2)
+        elif operation == 'quit':
+            sys.exit()
+        else:
+            print("Invalid operation. Please enter a valid operation. ")
+        
 
 def calculate():
     print("Welcome! I'm a calculator. Enter " \
-        "your first number: ")
+        "your first number: (Type 'quit' to exit the program.)")
     first_num = check_num()
     print("Great! Now enter your second number: ")
     second_num = check_num()
@@ -55,9 +66,9 @@ def calculate():
 
 
 def main():
-    while(1):
+    while 1:
         result = calculate()
-        print(result)
+        print("Great! Your answer is: ", result)
 
 
 main()
