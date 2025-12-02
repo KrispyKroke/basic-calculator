@@ -1,79 +1,105 @@
-import sys
+from tkinter import *
+expr = ""  # Global expression string
+import math
 
+def press(key):
+    global expr
+    expr += str(key)
+    display.set(expr)
 
-# addition function
-def addition(x, y):
-    return round(float(x) + float(y), 2)
+def squared():
+    global expr
+    try:
+        expr = float(expr)
+        expr *= expr
+        result = str(round(expr, 2))
+        display.set(result)
+        expr = ''
+    except:
+        display.set('error')
+        expr = ''
 
-# subtraction function
-def subtraction(x, y):
-    return round(float(x) - float(y), 2)
+def square_Root():
+    global expr
+    try:
+        expr = float(expr)
+        expr = math.sqrt(expr)
+        result = str(round(expr, 2))
+        display.set(result)
+        expr = ''
+    except:
+        display.set('error')
+        expr = ''
 
-# multiplication function
-def multiplication(x, y):
-    return round(float(x) * float(y), 2)
+def equal():
+    global expr
+    try:
+        result = str(round(eval(expr), 2))
+        display.set(result)
+        expr = ""
+    except:
+        display.set("error")
+        expr = ""
 
-# division function
-def division(x, y):
-    return round(float(x) / float(y), 2)
+def clear():
+    global expr
+    expr = ""
+    display.set("")
 
-# remainder function
-def modulus(x, y):
-    return round(float(x) % float(y), 2)
+if __name__ == "__main__":
+    root = Tk()
+    root.configure(bg="turquoise")
+    root.title("Basic Calculator")
+    root.geometry("470x330")
 
-# checks validity of user input, looking for a valid number or the 'quit' keyword
-def check_num():
-    run_func = True
-    while run_func:
-        num = input()
-        if num == 'quit':
-            sys.exit()
-        try:
-            float(num)
-            run_func = False
-        except:
-            print("Invalid input. Please enter a number. ")
-    return num
+    display = StringVar()
+    entry = Entry(root, textvariable=display)
+    entry.grid(columnspan=4, ipadx=70)
 
-        
-        
-# checks validity of the operator input, determining which operation to perform 
-def check_operation(num_1, num_2):
-    while True:
-        operation = input()
-        if operation == '+' or operation == 'addition':
-            return addition(num_1, num_2)
-        elif operation == '-' or operation == 'subtraction':
-            return subtraction(num_1, num_2)
-        elif operation == '/' or operation == 'division':
-            return division(num_1, num_2)
-        elif operation == '*' or operation == 'multiplication':
-            return multiplication(num_1, num_2)
-        elif operation == '%' or operation == 'modulus':
-            return modulus(num_1, num_2)
-        elif operation == 'quit':
-            sys.exit()
-        else:
-            print("Invalid operation. Please enter a valid operation. ")
-        
+    # Number buttons
+    btn1 = Button(root, text='1', fg='black', bg='white', command=lambda: press(1), height=3, width=9)
+    btn1.grid(row=2, column=0)
+    btn2 = Button(root, text='2', fg='black', bg='white', command=lambda: press(2), height=3, width=9)
+    btn2.grid(row=2, column=1)
+    btn3 = Button(root, text='3', fg='black', bg='white', command=lambda: press(3), height=3, width=9)
+    btn3.grid(row=2, column=2)
+    btn4 = Button(root, text='4', fg='black', bg='white', command=lambda: press(4), height=3, width=9)
+    btn4.grid(row=3, column=0)
+    btn5 = Button(root, text='5', fg='black', bg='white', command=lambda: press(5), height=3, width=9)
+    btn5.grid(row=3, column=1)
+    btn6 = Button(root, text='6', fg='black', bg='white', command=lambda: press(6), height=3, width=9)
+    btn6.grid(row=3, column=2)
+    btn7 = Button(root, text='7', fg='black', bg='white', command=lambda: press(7), height=3, width=9)
+    btn7.grid(row=4, column=0)
+    btn8 = Button(root, text='8', fg='black', bg='white', command=lambda: press(8), height=3, width=9)
+    btn8.grid(row=4, column=1)
+    btn9 = Button(root, text='9', fg='black', bg='white', command=lambda: press(9), height=3, width=9)
+    btn9.grid(row=4, column=2)
+    btn0 = Button(root, text='0', fg='black', bg='white', command=lambda: press(0), height=3, width=9)
+    btn0.grid(row=5, column=0)
 
-# main calculation function that calls secondary functions where needed
-def calculate():
-    print("Welcome! I'm a calculator. Enter " \
-        "your first number: (Type 'quit' to exit the program.)")
-    first_num = check_num()
-    print("Great! Now enter your second number: ")
-    second_num = check_num()
-    print("Great! Now enter your operation: ")
-    result = check_operation(first_num, second_num)
-    return result
-    
+    # Operator buttons
+    plus = Button(root, text='+', fg='black', bg='white', command=lambda: press('+'), height=3, width=9)
+    plus.grid(row=2, column=3)
+    minus = Button(root, text='-', fg='black', bg='white', command=lambda: press('-'), height=3, width=9)
+    minus.grid(row=3, column=3)
+    mult = Button(root, text='*', fg='black', bg='white', command=lambda: press('*'), height=3, width=9)
+    mult.grid(row=4, column=3)
+    div = Button(root, text='/', fg='black', bg='white', command=lambda: press('/'), height=3, width=9)
+    div.grid(row=5, column=3)
+    mod = Button(root, text='%', fg='black', bg='white', command=lambda: press('%'), height=3, width=9)
+    mod.grid(row=6, column=3)
+    square = Button(root, text='x * x', fg='black', bg='white', command=lambda: squared(), height=3, width=9)
+    square.grid(row=6, column=2)
+    square_root = Button(root, text='SquareRoot(x)', fg='black', bg='white', command=lambda: square_Root(), height=3, width=9)
+    square_root.grid(row=6, column=1)
 
-# the main function of the application that runs upon start up
-def main():
-    while 1:
-        result = calculate()
-        print("Great! Your answer is: ", result)
+    # Other buttons
+    eq = Button(root, text='=', fg='black', bg='white', command=equal, height=3, width=9)
+    eq.grid(row=5, column=2)
+    clr = Button(root, text='Clear', fg='black', bg='white', command=clear, height=3, width=9)
+    clr.grid(row=5, column=1)
+    dot = Button(root, text='.', fg='black', bg='white', command=lambda: press('.'), height=3, width=9)
+    dot.grid(row=6, column=0)
 
-
-main()
+    root.mainloop()
