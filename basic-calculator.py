@@ -2,51 +2,51 @@ from tkinter import *
 expr = ""  # Global expression string
 import math
 
-def press(key):
+def press(key): # adds the button input to the existing expression
     global expr
     expr += str(key)
     display.set(expr)
 
-def squared():
+def squared():  # function which squares the expression/result
     global expr
     try:
-        expr = float(expr)
+        expr = round(eval(expr), 2)
         expr *= expr
         result = str(round(expr, 2))
         display.set(result)
-        expr = ''
+        expr = result
     except:
         display.set('error')
         expr = ''
 
-def square_Root():
+def square_Root():  #function which takes the square root of the expression/result
     global expr
     try:
-        expr = float(expr)
+        expr = round(eval(expr), 2)
         expr = math.sqrt(expr)
         result = str(round(expr, 2))
         display.set(result)
-        expr = ''
+        expr = result
     except:
         display.set('error')
         expr = ''
 
-def equal():
+def equal():    # evaluates the expression when the equal sign key is pressed
     global expr
     try:
         result = str(round(eval(expr), 2))
         display.set(result)
-        expr = ""
+        expr = result
     except:
         display.set("error")
         expr = ""
 
-def clear():
+def clear():    # clears the expression when the clear key is pressed
     global expr
     expr = ""
     display.set("")
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # code which forms the main structure of the calculator application using python and tkinter
     root = Tk()
     root.configure(bg="turquoise")
     root.title("Basic Calculator")
@@ -102,4 +102,4 @@ if __name__ == "__main__":
     dot = Button(root, text='.', fg='black', bg='white', command=lambda: press('.'), height=3, width=9)
     dot.grid(row=6, column=0)
 
-    root.mainloop()
+    root.mainloop() # allows the application to continue running until the user manually exits

@@ -1,1 +1,3 @@
-# basic-calculator
+# Basic Calculator
+
+## This was a fun side-project I developed in order to practice some skills and improve my proficiency with Python as well as the Tkinter library. It was my first experience using Tkinter to develop a GUI for this application. It performs all of the standard arithmetic operations (including modulus) with both integers and floating point numbers.  There is also the addition of the square root and squaring functions in this particular application.
